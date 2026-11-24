@@ -14,7 +14,10 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - uses: android-actions/setup-android@v3
+      # SDK (platforms/build-tools + принятые лицензии) уже предустановлен в ubuntu-latest;
+      # android-actions/setup-android@v3 падает на текущих раннерах, поэтому шаг убран.
+      - name: Android SDK info
+        run: echo "ANDROID_HOME=$ANDROID_HOME" && ls "$ANDROID_HOME/platforms"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.11.1
